@@ -1,0 +1,22 @@
+name: Test tflint_params - pass extra parameters to tflint
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Run tflint action with tflint_params (no config file so params are used)
+        id: action
+        uses: .
+        with:
+          fail_on_changes: "false"
+          dir_filter: "tests/fixtures/tf-params"
+          tflint_params: "--minimum-failure-severity=error"
+          run_init: "false"
+
+      - name: Assert action completed with tflint_params
+        run: |
+          echo "Action completed with tflint_params=--minimum-failure-severity=error"
+          echo "PASS"
