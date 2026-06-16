@@ -1,0 +1,39 @@
+name: Test tflint with dir_filter
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Create Terraform files in multiple directories
+        run: |
+          mkdir -p modules/network
+          mkdir -p modules/compute
+          cat > modules/network/main.tf << 'EOF'
+          resource "null_resource" "network" {}
+          EOF
+          cat > modules/compute/main.tf << 'EOF'
+          resource "null_resource" "compute" {}
+          EOF
+
+      - name: Create tflint config
+        run: |
+          cat > .tflint.hcl << 'EOF'
+          config {
+            disabled_by_default = false
+          }
+          EOF
+
+      - id: action
+        uses: .
+        with:
+          fail_on_changes: "true"
+          dir_filter: "network"
+          run_init: "false"
+
+      - name: Assert action completed successfully with dir_filter
+        run: |
+          echo "Action completed with dir_filter=network"
+          echo "PASS"

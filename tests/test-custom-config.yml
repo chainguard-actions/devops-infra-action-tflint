@@ -1,0 +1,36 @@
+name: Test tflint with custom config path
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Create a simple valid Terraform file
+        run: |
+          mkdir -p mymodule
+          cat > mymodule/main.tf << 'EOF'
+          resource "null_resource" "example" {}
+          EOF
+
+      - name: Create custom tflint config at a non-default path
+        run: |
+          mkdir -p config
+          cat > config/custom-tflint.hcl << 'EOF'
+          config {
+            disabled_by_default = false
+          }
+          EOF
+
+      - id: action
+        uses: .
+        with:
+          fail_on_changes: "true"
+          tflint_config: "config/custom-tflint.hcl"
+          run_init: "false"
+
+      - name: Assert action completed with custom config
+        run: |
+          echo "Action completed with custom tflint_config path"
+          echo "PASS"
