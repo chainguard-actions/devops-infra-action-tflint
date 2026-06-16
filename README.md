@@ -8,6 +8,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
+| v1.0.1 | [`v1.0.1`](https://github.com/chainguard-actions/devops-infra-action-tflint/tree/v1.0.1) | [`b5666d5`](https://github.com/devops-infra/action-tflint/commit/b5666d5ea10ba800ce08d14ab596c0f660f3ee13) |
 | v1.0.2 | [`v1.0.2`](https://github.com/chainguard-actions/devops-infra-action-tflint/tree/v1.0.2) | [`38a96a4`](https://github.com/devops-infra/action-tflint/commit/38a96a42ab75bc29e6630704f135ae43f99dd589) |
 | v1.0.3 | [`v1.0.3`](https://github.com/chainguard-actions/devops-infra-action-tflint/tree/v1.0.3) | [`e1e1fbe`](https://github.com/devops-infra/action-tflint/commit/e1e1fbea490af151cb68647dbc9428381f0ab0f7) |
 | v1.0.4 | [`v1.0.4`](https://github.com/chainguard-actions/devops-infra-action-tflint/tree/v1.0.4) | [`c528051`](https://github.com/devops-infra/action-tflint/commit/c5280517a6102dba3ecda962f3fbd8e073eb6ea8) |
