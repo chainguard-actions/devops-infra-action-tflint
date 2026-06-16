@@ -1,0 +1,30 @@
+name: GitHub Action linting Terraform files
+author: Krzysztof Szyper / ChristophShyper / shyper.pro
+description: GitHub Action that will run TFlint on Terraform files
+inputs:
+  fail_on_changes:
+    description: Whether the action should fail if errors found. Defaults totrue.
+    required: false
+    default: "true"
+  dir_filter:
+    description: Filter for directories to check. Check all by default.
+    required: false
+    default: "*"
+  tflint_config:
+    description: Location of TFLint config file. Defaults to .tflint.hcl.
+    required: false
+    default: .tflint.hcl
+  tflint_params:
+    description: Parameters passed to TFLint. Defaults to none.
+    required: false
+    default: ""
+  run_init:
+    description: Whether the action should run `terraform init`. Defaults to true.
+    required: false
+    default: "true"
+runs:
+  using: docker
+  image: docker://devopsinfra/action-tflint@sha256:f47b0c2df266d8877f96f1b1424197e1a630fc1749f99532ba32f6cf6a0fe799 # v1.0.0
+branding:
+  color: purple
+  icon: upload-cloud

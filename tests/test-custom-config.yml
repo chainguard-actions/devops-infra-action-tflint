@@ -1,0 +1,20 @@
+name: Test custom tflint config path
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - id: action
+        uses: .
+        with:
+          fail_on_changes: "true"
+          dir_filter: "pristine/devops-infra--action-tflint/v1.0.1/tests/fixtures/tf-basic"
+          tflint_config: "pristine/devops-infra--action-tflint/v1.0.1/tests/fixtures/configs/custom.tflint.hcl"
+          run_init: "false"
+
+      - name: Assert action completed with custom config
+        run: |
+          echo "PASS: tflint ran with custom config path without errors"
